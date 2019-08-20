@@ -5,8 +5,8 @@ import sys
 import traceback
 from abc import abstractmethod
 
-from smapy.utils import get_ms, safecopy
 from smapy.runnable import Runnable
+from smapy.utils import get_ms, safecopy
 
 
 class BaseAction(Runnable):

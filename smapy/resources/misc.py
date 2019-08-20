@@ -5,8 +5,8 @@ import functools
 
 from bson import ObjectId
 
-from smapy.utils import get_bool, sum_dicts
 from smapy.resources.base import BaseResource
+from smapy.utils import get_bool, sum_dicts
 
 
 class MultiProcess(BaseResource):
