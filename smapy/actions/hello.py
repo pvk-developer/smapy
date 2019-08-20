@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from smapy.action import BaseAction
+from smapy.actions.base import BaseAction
 
 
 class World(BaseAction):

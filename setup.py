@@ -72,7 +72,7 @@ setup(
     description="Simple Modular API written in Python.",
     entry_points = {
         'console_scripts': [
-            'smapy=smapy.cli:main'
+            'smapy=smapy.__main__:main'
         ],
     },
     extras_require={

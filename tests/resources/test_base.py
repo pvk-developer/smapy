@@ -6,7 +6,7 @@ from unittest.mock import Mock, call, patch
 import falcon
 from bson import ObjectId
 
-from smapy.resource import BaseResource
+from smapy.resources import BaseResource
 
 
 class TestBaseResource(TestCase):
@@ -182,8 +182,8 @@ class TestBaseResource(TestCase):
     # #########################################################
     # _run_one(self, runnable, messages, concurrency, remote) #
     # #########################################################
-    @patch('smapy.resource.Pool')
-    @patch('smapy.resource.gevent')
+    @patch('smapy.resources.base.Pool')
+    @patch('smapy.resources.base.gevent')
     def test__run_one_many(self, gevent_mock, pool_class_mock):
         """If multiple messages call runnable._run multiple times using gevent."""
 
@@ -339,8 +339,8 @@ class TestBaseResource(TestCase):
         self.assertEqual('messages and runnables lists should have the same length',
                          exception.description)
 
-    @patch('smapy.resource.Pool')
-    @patch('smapy.resource.gevent')
+    @patch('smapy.resources.base.Pool')
+    @patch('smapy.resources.base.gevent')
     def test__run_many_single_message(self, gevent_mock, pool_class_mock):
         """If messages is not a list, it must be converted into one."""
 

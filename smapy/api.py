@@ -8,7 +8,7 @@ import falcon
 from pymongo import MongoClient
 
 from smapy import resources
-from smapy.action import BaseAction
+from smapy.actions import BaseAction
 from smapy.middleware import JSONSerializer, ResponseBuilder
 from smapy.runnable import RemoteRunnable
 from smapy.utils import find_submodules

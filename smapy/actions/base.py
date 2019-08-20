@@ -5,7 +5,7 @@ import sys
 import traceback
 from abc import abstractmethod
 
-from smapy import utils
+from smapy.utils import get_ms, safecopy
 from smapy.runnable import Runnable
 
 
@@ -17,7 +17,7 @@ class BaseAction(Runnable):
     def copy_message(self, message):
         self.initial_message = dict()
         try:
-            self.initial_message = utils.safecopy(message)
+            self.initial_message = safecopy(message)
 
         except RuntimeError as rerror:
             self.logger.error('Could not copy initial message: %s', rerror)
@@ -38,7 +38,7 @@ class BaseAction(Runnable):
 
         audit = {
             'end_ts': end_ts,
-            'elapsed': utils.get_ms(end_ts - self.start_ts),
+            'elapsed': get_ms(end_ts - self.start_ts),
         }
         if exception:
             audit['status'] = 'EXCEPTION'

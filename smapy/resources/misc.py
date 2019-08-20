@@ -5,8 +5,8 @@ import functools
 
 from bson import ObjectId
 
-from smapy import utils
-from smapy.resource import BaseResource
+from smapy.utils import get_bool, sum_dicts
+from smapy.resources.base import BaseResource
 
 
 class MultiProcess(BaseResource):
@@ -19,7 +19,7 @@ class MultiProcess(BaseResource):
 
         self.invoke(resource, messages, concurrency=processes, remote=True)
         results = [m['results'] for m in messages]
-        message.update(functools.reduce(utils.sum_dicts, results))
+        message.update(functools.reduce(sum_dicts, results))
 
         message['details'] = results
 
@@ -169,7 +169,7 @@ class Report(BaseResource):
 
             message['session_data'] = self.get_session_counts(session)
 
-            if utils.get_bool(message, 'details'):
+            if get_bool(message, 'details'):
                 message['details'] = self.get_action_details(match)
 
         message['session'] = session

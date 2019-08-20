@@ -8,7 +8,7 @@ from unittest.mock import Mock, call, patch
 import falcon
 
 from smapy import api, middleware
-from smapy.actions import hello
+from smapy.actions import base, hello
 
 
 class TestExceptionSerializer(TestCase):
@@ -301,8 +301,8 @@ class TestAPI(TestCase):
         # Here we go into the API._middleware list and look for the classes
         # which the registered methods belong to.
         self.assertEqual(2, len(api_._middleware[0]))
-        self.assertIsInstance(api_._middleware[0][0].__self__, middleware.JSONSerializer)
-        self.assertIsInstance(api_._middleware[0][1].__self__, middleware.ResponseBuilder)
+        self.assertIsInstance(api_._middleware[0][0][0].__self__, middleware.JSONSerializer)
+        self.assertIsInstance(api_._middleware[0][1][0].__self__, middleware.ResponseBuilder)
 
         exception_serializer = api_._serialize_error
         self.assertEqual(api.exception_serializer, exception_serializer)
@@ -319,6 +319,7 @@ class TestAPI(TestCase):
         api_.add_route.assert_called_once_with(remote_runnable_mock.route, remote_runnable_mock)
 
         runnables = {
+            'base.BaseAction': base.BaseAction,
             'hello.World': hello.World
         }
         self.assertEqual(runnables, api_.runnables)
